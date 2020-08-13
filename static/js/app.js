@@ -22,3 +22,21 @@ function buildTable(data) {
         );
     });
 }
+
+function handleClick() {
+    // Get date vale from the filter
+    let date = d3.select("#datetime").property("value");
+    let filteredData = tableData;
+
+    //if statement to see if there has been a date entered in the filter
+    if (date) {
+        filteredData = filteredData.filter(row => row.datetime === date);
+    };
+
+    // Rebuild table using filtered data. If no filter, will just be original tableData
+    buildTable(filteredData);
+};
+
+d3.selectAll("#filter-btn").on("click", handleClick);
+
+buildTable(tableData);
